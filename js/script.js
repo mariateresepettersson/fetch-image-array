@@ -12,8 +12,30 @@ const getImage = async function () {
     const images = await res.json();
     //Log out json in console
     console.log(images);
+    selectRandomImage(images);
 };
 
-//Call the function
-getImage();
+//Declare a function to randomly select an image form the API
+const selectRandomImage = function (images) {
+    const randomIndex = Math.floor(Math.random() * images.length);
+    //console.log(randomIndex);
+    const randomImage = images[randomIndex];
+    //console.log(randomImage);
 
+    displayImage(randomImage);
+};
+
+//Declare a function to display image
+const displayImage = function (randomImage) {
+    const author = randomImage.author;
+    const imageAddress = randomImage.download_url;
+
+    authorSpan.innerHTML = author;
+    img.src = imageAddress;
+    imgDiv.classList.remove("hide");
+};
+
+button.addEventListener("click", function () {
+    //Call the function
+    getImage();
+});
